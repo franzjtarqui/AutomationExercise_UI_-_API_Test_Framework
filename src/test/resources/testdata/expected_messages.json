@@ -1,0 +1,8 @@
+{
+  "accountCreated": "Account Created!",
+  "accountDeleted": "Account Deleted!",
+  "loginError": "Your email or password is incorrect!",
+  "signupEmailExists": "Email Address already exist!",
+  "orderPlaced": "Order Placed!",
+  "cartItemAdded": "Added!"
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<!-- See the parallelism comment in testng.xml. -->
+<suite name="AutomationExercise - UI Suite" verbose="1" data-provider-thread-count="4">
+    <listeners>
+        <listener class-name="com.portfolio.ae.listeners.RetryTransformer"/>
+    </listeners>
+    <test name="UI">
+        <classes>
+            <class name="com.portfolio.ae.runners.UIRunner"/>
+        </classes>
+    </test>
+</suite>

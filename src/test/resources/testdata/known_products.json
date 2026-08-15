@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "name": "Blue Top",
+    "category": "Tops",
+    "price": "Rs. 500",
+    "availability": "In Stock"
+  },
+  {
+    "id": "2",
+    "name": "Men Tshirt",
+    "category": "Tshirts",
+    "price": "Rs. 400",
+    "availability": "In Stock"
+  }
+]

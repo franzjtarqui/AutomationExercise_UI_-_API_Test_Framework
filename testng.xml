@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<!--
+  Parallelism (PLAN.md section 1: "parallel execution per scenario"):
+  - UI/API: each Cucumber scenario is a row of the runners' @DataProvider(parallel=true);
+    "data-provider-thread-count" governs how many scenarios run at the same time. 4 is a
+    deliberate balance between speed and stability: automationexercise.com is a practice site
+    with third-party ads/overlays (PLAN.md section 10), and a higher value increased the
+    observed flakiness (timeouts, Cloudflare 5xx errors under load) without shortening the
+    total time much.
+  - Unit: doesn't use @DataProvider: it's parallelized per class with the <test>'s
+    "parallel"/"thread-count" attribute, independent of the data-provider-thread-count above.
+  - RetryTransformer (com.portfolio.ae.listeners) retries any failing test once, an additional
+    mitigation for the site's residual flakiness under parallelism (PLAN.md section 10).
+-->
+<suite name="AutomationExercise - All Suites" verbose="1" data-provider-thread-count="4">
+    <listeners>
+        <listener class-name="com.portfolio.ae.listeners.RetryTransformer"/>
+    </listeners>
+    <test name="UI">
+        <classes>
+            <class name="com.portfolio.ae.runners.UIRunner"/>
+        </classes>
+    </test>
+    <test name="API">
+        <classes>
+            <class name="com.portfolio.ae.runners.ApiRunner"/>
+        </classes>
+    </test>
+    <test name="Unit" parallel="classes" thread-count="4">
+        <classes>
+            <class name="com.portfolio.ae.utils.JsonReaderTest"/>
+            <class name="com.portfolio.ae.utils.FakerUtilTest"/>
+            <class name="com.portfolio.ae.utils.AssertionsTest"/>
+            <class name="com.portfolio.ae.data.UserBuilderTest"/>
+            <class name="com.portfolio.ae.data.ExpectedMessagesTest"/>
+            <class name="com.portfolio.ae.data.ProductFixturesTest"/>
+            <class name="com.portfolio.ae.api.models.ApiModelsTest"/>
+            <class name="com.portfolio.ae.api.models.AccountRequestTest"/>
+            <class name="com.portfolio.ae.api.clients.BaseApiClientTest"/>
+            <class name="com.portfolio.ae.api.clients.ProductApiClientTest"/>
+            <class name="com.portfolio.ae.api.clients.BrandApiClientTest"/>
+            <class name="com.portfolio.ae.api.clients.SearchApiClientTest"/>
+            <class name="com.portfolio.ae.api.clients.AuthApiClientTest"/>
+            <class name="com.portfolio.ae.api.clients.AccountApiClientTest"/>
+        </classes>
+    </test>
+</suite>

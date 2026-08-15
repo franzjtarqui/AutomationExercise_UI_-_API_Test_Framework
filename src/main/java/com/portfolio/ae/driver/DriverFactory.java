@@ -27,13 +27,27 @@ public final class DriverFactory {
         };
     }
 
+    // Automation fingerprint hidden from the page (navigator.webdriver, "Chrome is being
+    // controlled by automated test software" banner, etc.). automationexercise.com sits behind
+    // Cloudflare, which challenges/blocks the default headless Selenium fingerprint much more
+    // aggressively when the request comes from a data-center IP range (e.g. GitHub Actions
+    // runners) than from a residential/local IP; these flags plus a realistic desktop user agent
+    // make headless Chrome look like a normal browser and avoid that block in CI.
+    private static final String DESKTOP_USER_AGENT =
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                    + "Chrome/131.0.0.0 Safari/537.36";
+
     private static ChromeOptions chromeOptions(boolean headless) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--disable-notifications");
+        options.addArguments("--disable-blink-features=AutomationControlled");
+        options.setExperimentalOption("excludeSwitches", new String[] {"enable-automation"});
+        options.setExperimentalOption("useAutomationExtension", false);
         if (headless) {
             options.addArguments("--headless=new");
+            options.addArguments("--user-agent=" + DESKTOP_USER_AGENT);
             // Required on CI runners (Linux containers without a generous /dev/shm or user sandbox).
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");

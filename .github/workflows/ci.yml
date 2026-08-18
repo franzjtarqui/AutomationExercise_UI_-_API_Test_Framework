@@ -122,22 +122,32 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
-      - name: Generate Allure report with history
-        uses: simple-elf/allure-report-action@v1.9
-        if: always()
+      - name: Set up JDK 17 (Temurin)
+        uses: actions/setup-java@v4
         with:
-          allure_results: allure-results
-          allure_report: allure-report
-          allure_history: allure-history
-          gh_pages: gh-pages
-          keep_reports: 20
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Merge results and seed previous history
+        shell: bash
+        run: |
+          mkdir -p target/allure-results
+          cp -R allure-results/. target/allure-results/ 2>/dev/null || true
+          mkdir -p target/site/allure-maven-plugin/history
+          if [ -d gh-pages/history ]; then cp -R gh-pages/history/. target/site/allure-maven-plugin/history/; fi
+
+      # Generate the report with the allure-maven-plugin already configured in pom.xml. Replaces
+      # simple-elf/allure-report-action, whose runtime Docker build fails on GitHub runners.
+      - name: Generate Allure report
+        run: mvn -B allure:report
 
       - name: Upload Allure report as artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
-          path: allure-report
+          path: target/site/allure-maven-plugin
           retention-days: 20
           if-no-files-found: warn
 
@@ -147,4 +157,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: allure-history
+          publish_dir: target/site/allure-maven-plugin

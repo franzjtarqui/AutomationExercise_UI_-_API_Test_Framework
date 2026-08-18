@@ -22,6 +22,10 @@ public abstract class BasePage {
 
     protected void open(String url) {
         driver.get(url);
+        // The site sits behind Cloudflare, which sometimes serves a "Just a moment..." challenge
+        // to headless Selenium traffic (notably from data-center IPs like GitHub Actions) instead
+        // of the real page; wait it out so the first element wait on the new page doesn't time out.
+        waitUtils.resolveCloudflareChallengeIfPresent();
     }
 
     protected void click(By locator) {

@@ -3,17 +3,21 @@
 <!--
   Parallelism (PLAN.md section 1: "parallel execution per scenario"):
   - UI/API: each Cucumber scenario is a row of the runners' @DataProvider(parallel=true);
-    "data-provider-thread-count" governs how many scenarios run at the same time. 4 is a
+    "data-provider-thread-count" governs how many scenarios run at the same time. 2 is a
     deliberate balance between speed and stability: automationexercise.com is a practice site
-    with third-party ads/overlays (PLAN.md section 10), and a higher value increased the
-    observed flakiness (timeouts, Cloudflare 5xx errors under load) without shortening the
-    total time much.
+    with third-party ads/overlays (PLAN.md section 10), and higher values increased the
+    observed flakiness (timeouts, Cloudflare challenges/5xx errors under load) in CI runs
+    from data-center IPs. 4 was tried first and consistently failed in CI on the scenarios
+    that register a user and navigate right after (GitHub Actions/Azure IPs are challenged by
+    Cloudflare more aggressively; see WaitUtils.CloudflareChallenge).
   - Unit: doesn't use @DataProvider: it's parallelized per class with the <test>'s
     "parallel"/"thread-count" attribute, independent of the data-provider-thread-count above.
   - RetryTransformer (com.portfolio.ae.listeners) retries any failing test once, an additional
     mitigation for the site's residual flakiness under parallelism (PLAN.md section 10).
+  - Cloudflare: WaitUtils detects the "Just a moment..." interstitial and waits for it to
+    resolve before failing, and BasePage.open() waits it out after every navigation.
 -->
-<suite name="AutomationExercise - All Suites" verbose="1" data-provider-thread-count="4">
+<suite name="AutomationExercise - All Suites" verbose="1" data-provider-thread-count="2">
     <listeners>
         <listener class-name="com.portfolio.ae.listeners.RetryTransformer"/>
     </listeners>

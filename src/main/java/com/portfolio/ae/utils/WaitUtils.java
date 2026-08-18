@@ -69,6 +69,20 @@ public class WaitUtils {
     }
 
     /**
+     * Visibility query for boolean checks (isVisible/isLoggedIn/isSignupLoginVisible...): waits
+     * up to the explicit timeout and returns the element, or {@code null} if it never became
+     * visible. Unlike {@link #waitVisible} it is silent (no diagnostics, no Cloudflare retry), so
+     * expected-absent elements (e.g. "Logged in as" after logout) don't pollute the logs.
+     */
+    public WebElement tryWaitVisible(By locator) {
+        try {
+            return newWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(locator));
+        } catch (TimeoutException timeoutException) {
+            return null;
+        }
+    }
+
+    /**
      * True while the page is a Cloudflare challenge (title "Just a moment..." or a challenge
      * element in the DOM). Defensive: never throws, so it's safe to call on every wait.
      */
@@ -124,7 +138,40 @@ public class WaitUtils {
                     return newWebDriverWait().until(condition);
                 }
             }
+            logPageStateOnTimeout();
             throw firstTimeout;
+        }
+    }
+
+    /**
+     * Diagnostic aid for CI failures: dumps the URL, title, page markers and a page-source
+     * snippet whenever a wait times out, so the page that replaced the expected one (Cloudflare
+     * interstitial, rate-limit/error page, empty render...) can be identified from the logs
+     * without a screenshot. Never throws.
+     */
+    private void logPageStateOnTimeout() {
+        try {
+            String url = driver.getCurrentUrl();
+            String title = driver.getTitle();
+            String source = driver.getPageSource();
+            LOGGER.error("Element wait timed out. Page state:\n"
+                            + "  URL={}\n"
+                            + "  Title={}\n"
+                            + "  Cloudflare challenge present={}\n"
+                            + "  Markers -> header={} footer={} cartModal={} products={} loginForm={} accountCreated={}\n"
+                            + "  Page source length={}\n"
+                            + "  Page source (first 1500 chars): {}",
+                    url, title, isCloudflareChallengePresent(),
+                    source.contains("id=\"header\""),
+                    source.contains("id=\"footer\""),
+                    source.contains("cartModal"),
+                    source.contains("product-image-wrapper"),
+                    source.contains("input[data-qa='login-email']"),
+                    source.contains("data-qa='account-created'"),
+                    source.length(),
+                    source.length() > 1500 ? source.substring(0, 1500) : source);
+        } catch (WebDriverException diagnosticFailed) {
+            LOGGER.error("Could not capture page state on wait timeout: {}", diagnosticFailed.getMessage());
         }
     }
 

@@ -2,7 +2,6 @@ package com.portfolio.ae.ui.pages;
 
 import com.portfolio.ae.utils.WaitUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -43,11 +42,8 @@ public abstract class BasePage {
     }
 
     protected boolean isVisible(By locator) {
-        try {
-            return waitUtils.waitVisible(locator).isDisplayed();
-        } catch (TimeoutException timeoutException) {
-            return false;
-        }
+        WebElement element = waitUtils.tryWaitVisible(locator);
+        return element != null && element.isDisplayed();
     }
 
     public String getTitle() {

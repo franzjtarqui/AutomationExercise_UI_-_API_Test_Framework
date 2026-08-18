@@ -14,6 +14,7 @@ import com.portfolio.ae.ui.pages.LoginSignupPage;
 import com.portfolio.ae.ui.pages.OrderConfirmationPage;
 import com.portfolio.ae.ui.pages.PaymentPage;
 import com.portfolio.ae.ui.pages.ProductDetailPage;
+import com.portfolio.ae.ui.pages.ProductsPage;
 import com.portfolio.ae.ui.pages.SignupDetailsPage;
 import com.portfolio.ae.utils.Assertions;
 import io.cucumber.java.After;
@@ -61,6 +62,9 @@ public class CheckoutSteps {
         // LoginSteps, which does an explicit logout in order to test login); there's no need to log
         // in again, and navigating to /login with an active session redirects to home.
         accountCreatedPage.clickContinue();
+        // Land on the products grid explicitly (the reliable driver.get() path) so "I add product
+        // ..." doesn't depend on the post-registration home page having rendered its product cards.
+        new ProductsPage(driver()).open();
     }
 
     @And("I go to the cart and proceed to checkout")

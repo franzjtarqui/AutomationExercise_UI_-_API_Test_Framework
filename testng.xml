@@ -14,8 +14,11 @@
     "parallel"/"thread-count" attribute, independent of the data-provider-thread-count above.
   - RetryTransformer (com.portfolio.ae.listeners) retries any failing test once, an additional
     mitigation for the site's residual flakiness under parallelism (PLAN.md section 10).
-  - Cloudflare: WaitUtils detects the "Just a moment..." interstitial and waits for it to
-    resolve before failing, and BasePage.open() waits it out after every navigation.
+  - Cloudflare: WaitUtils detects the "Just a moment..." interstitial (isCloudflareChallengePresent /
+    resolveCloudflareChallengeIfPresent) and waits for it to resolve before failing, and
+    BasePage.open() waits it out after every navigation. Post-registration navigation
+    (AccountCreatedPage.clickContinue) re-navigates explicitly with driver.get() (the reliable
+    path in CI) instead of relying only on the Continue click.
 -->
 <suite name="AutomationExercise - All Suites" verbose="1" data-provider-thread-count="2">
     <listeners>

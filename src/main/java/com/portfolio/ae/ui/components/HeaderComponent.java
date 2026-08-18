@@ -2,8 +2,8 @@ package com.portfolio.ae.ui.components;
 
 import com.portfolio.ae.utils.WaitUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * Top bar, present on every page: Login/Signup, Cart, "Logged in as",
@@ -63,10 +63,7 @@ public class HeaderComponent {
     }
 
     private boolean isVisible(By locator) {
-        try {
-            return waitUtils.waitVisible(locator).isDisplayed();
-        } catch (TimeoutException timeoutException) {
-            return false;
-        }
+        WebElement element = waitUtils.tryWaitVisible(locator);
+        return element != null && element.isDisplayed();
     }
 }

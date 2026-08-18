@@ -16,8 +16,17 @@ public class AccountCreatedPage extends BasePage {
         return textOf(ACCOUNT_CREATED_HEADING);
     }
 
+    /**
+     * Leaves the "Account Created" confirmation and lands on the (logged-in) home page. The
+     * Continue link only navigates to {@code /}, so after clicking it we re-navigate explicitly:
+     * a click-triggered navigation right after the account-creation POST is the step that the
+     * site/Cloudflare intercepts from data-center IPs (CI) with an error/empty page, while a
+     * fresh {@code driver.get()} is the reliable path used by every other scenario.
+     */
     public HomePage clickContinue() {
         click(CONTINUE_BUTTON);
-        return new HomePage(driver);
+        HomePage homePage = new HomePage(driver);
+        homePage.open();
+        return homePage;
     }
 }

@@ -1,68 +1,68 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"  Contract of the public Products resource (PLAN.md section 4). The site always responds with
+  HTTP 200; the real contract code travels in the ""responseCode"" field of the body.","302","Get the full products list","","Tue Nov 10 13:23:42 UTC 2026","passed","Tue Nov 10 13:23:43 UTC 2026","","Products API","Get the full products list",""
+"  Contract of the public verifyLogin resource (PLAN.md section 4). The site always responds
+  with HTTP 200; the real contract code travels in the ""responseCode""/""message"" fields of the
+  body. The scenario that needs valid credentials creates its own ""seed"" user via the API
+  (there is no real persistent account to use as a fixture) and removes it when done.","425","DELETE is not supported on the verify login endpoint","","Tue Nov 10 13:23:42 UTC 2026","passed","Tue Nov 10 13:23:42 UTC 2026","","Verify Login API","DELETE is not supported on the verify login endpoint",""
+"  Contract of the public Search resource (PLAN.md section 4). The site always responds with
+  HTTP 200; the real contract code travels in the ""responseCode"" field of the body.","184","Searching without the required parameter fails","","Tue Nov 10 13:23:43 UTC 2026","passed","Tue Nov 10 13:23:43 UTC 2026","","Search Product API","Searching without the required parameter fails",""
 "  Full checkout with a logged-in user: address, dummy card payment and total recalculation by
   quantity (PLAN.md section 3). The site has no real coupon field (PLAN.md section 11); that
-  scope is covered here via the total recalculation instead.","24907","Place an order with a dummy card and see the order confirmation","","Mon Nov 09 13:45:40 UTC 2026","broken","Mon Nov 09 13:46:05 UTC 2026","","Checkout","Place an order with a dummy card and see the order confirmation",""
-"  Quick check used as a pre-flight for the UI suite: confirms that the base Page Objects
-  (BasePage, HeaderComponent, FooterComponent, HomePage) work correctly against the real site.","1684","The homepage loads with a working header","","Mon Nov 09 13:45:37 UTC 2026","passed","Mon Nov 09 13:45:38 UTC 2026","","Home page smoke checks","The homepage loads with a working header",""
-"  Adding, updating quantity and removing products from the cart (PLAN.md section 3).","8580","Add multiple products and validate each subtotal","","Mon Nov 09 13:44:59 UTC 2026","passed","Mon Nov 09 13:45:08 UTC 2026","","Shopping cart","Add multiple products and validate each subtotal",""
-"  Contract of the public verifyLogin resource (PLAN.md section 4). The site always responds
-  with HTTP 200; the real contract code travels in the ""responseCode""/""message"" fields of the
-  body. The scenario that needs valid credentials creates its own ""seed"" user via the API
-  (there is no real persistent account to use as a fixture) and removes it when done.","4894","Verify login with valid credentials","","Mon Nov 09 13:44:56 UTC 2026","passed","Mon Nov 09 13:45:01 UTC 2026","","Verify Login API","Verify login with valid credentials",""
-"  Adding, updating quantity and removing products from the cart (PLAN.md section 3).","4568","Update quantity from the product detail page","","Mon Nov 09 13:45:08 UTC 2026","passed","Mon Nov 09 13:45:12 UTC 2026","","Shopping cart","Update quantity from the product detail page",""
-"  Contract of the public verifyLogin resource (PLAN.md section 4). The site always responds
-  with HTTP 200; the real contract code travels in the ""responseCode""/""message"" fields of the
-  body. The scenario that needs valid credentials creates its own ""seed"" user via the API
-  (there is no real persistent account to use as a fixture) and removes it when done.","499","Verify login with invalid credentials","","Mon Nov 09 13:45:01 UTC 2026","passed","Mon Nov 09 13:45:01 UTC 2026","","Verify Login API","Verify login with invalid credentials",""
-"  New user sign-up via UI (PLAN.md section 3). Each scenario is independent and self-cleaning
-  (PLAN.md section 7): they don't depend on each other and don't leave orphaned test accounts,
-  so they can run safely in parallel.","12852","Attempt to register with an already existing email shows an error","","Mon Nov 09 13:46:28 UTC 2026","passed","Mon Nov 09 13:46:41 UTC 2026","","User registration","Attempt to register with an already existing email shows an error",""
-"  Contract of the public verifyLogin resource (PLAN.md section 4). The site always responds
-  with HTTP 200; the real contract code travels in the ""responseCode""/""message"" fields of the
-  body. The scenario that needs valid credentials creates its own ""seed"" user via the API
-  (there is no real persistent account to use as a fixture) and removes it when done.","247","Verify login without the email parameter","","Mon Nov 09 13:45:01 UTC 2026","passed","Mon Nov 09 13:45:02 UTC 2026","","Verify Login API","Verify login without the email parameter",""
-"  Product listing, search and detail view (PLAN.md section 3).","2637","View a product's detail","","Mon Nov 09 13:46:18 UTC 2026","passed","Mon Nov 09 13:46:21 UTC 2026","","Product search and details","View a product's detail",""
+  scope is covered here via the total recalculation instead.","15116","Recalculate totals when the quantity changes","","Tue Nov 10 13:24:34 UTC 2026","passed","Tue Nov 10 13:24:49 UTC 2026","","Checkout","Recalculate totals when the quantity changes",""
+"  Contract of the public Search resource (PLAN.md section 4). The site always responds with
+  HTTP 200; the real contract code travels in the ""responseCode"" field of the body.","236","Search for an existing product term","","Tue Nov 10 13:23:43 UTC 2026","passed","Tue Nov 10 13:23:43 UTC 2026","","Search Product API","Search for an existing product term",""
+"  Contract of the public Brands resource (PLAN.md section 4). The site always responds with
+  HTTP 200; the real contract code travels in the ""responseCode"" field of the body.","177","PUT is not supported on the brands list endpoint","","Tue Nov 10 13:23:42 UTC 2026","passed","Tue Nov 10 13:23:42 UTC 2026","","Brands API","PUT is not supported on the brands list endpoint",""
+"  Full checkout with a logged-in user: address, dummy card payment and total recalculation by
+  quantity (PLAN.md section 3). The site has no real coupon field (PLAN.md section 11); that
+  scope is covered here via the total recalculation instead.","11793","Proceed to checkout as a logged-in user and see the correct address","","Tue Nov 10 13:24:48 UTC 2026","passed","Tue Nov 10 13:24:59 UTC 2026","","Checkout","Proceed to checkout as a logged-in user and see the correct address",""
 "  Full account lifecycle chained together with generated data (PLAN.md section 4):
-  create -> verify -> update -> getDetail -> delete.","6335","Create, verify, update, fetch and delete an account","","Mon Nov 09 13:44:56 UTC 2026","passed","Mon Nov 09 13:45:02 UTC 2026","","Account Lifecycle API","Create, verify, update, fetch and delete an account",""
-"  Login/logout with an already registered account (PLAN.md section 3). The ""seed"" user is
-  created via UI at the start of each scenario that needs it and removed in a best-effort
-  cleanup hook (PLAN.md section 7).","2461","Login with invalid credentials shows an error","","Mon Nov 09 13:46:05 UTC 2026","passed","Mon Nov 09 13:46:08 UTC 2026","","Login and logout","Login with invalid credentials shows an error",""
-"  Contract of the public Products resource (PLAN.md section 4). The site always responds with
-  HTTP 200; the real contract code travels in the ""responseCode"" field of the body.","555","Get the full products list","","Mon Nov 09 13:45:02 UTC 2026","passed","Mon Nov 09 13:45:03 UTC 2026","","Products API","Get the full products list",""
-"  Adding, updating quantity and removing products from the cart (PLAN.md section 3).","11609","Add a product to the cart and verify quantity and price","","Mon Nov 09 13:44:59 UTC 2026","passed","Mon Nov 09 13:45:11 UTC 2026","","Shopping cart","Add a product to the cart and verify quantity and price",""
-"  Full checkout with a logged-in user: address, dummy card payment and total recalculation by
-  quantity (PLAN.md section 3). The site has no real coupon field (PLAN.md section 11); that
-  scope is covered here via the total recalculation instead.","12771","Proceed to checkout as a logged-in user and see the correct address","","Mon Nov 09 13:45:12 UTC 2026","passed","Mon Nov 09 13:45:25 UTC 2026","","Checkout","Proceed to checkout as a logged-in user and see the correct address",""
-"  Product listing, search and detail view (PLAN.md section 3).","3588","View the list of all products","","Mon Nov 09 13:46:11 UTC 2026","passed","Mon Nov 09 13:46:15 UTC 2026","","Product search and details","View the list of all products",""
-"  Full checkout with a logged-in user: address, dummy card payment and total recalculation by
-  quantity (PLAN.md section 3). The site has no real coupon field (PLAN.md section 11); that
-  scope is covered here via the total recalculation instead.","11637","Recalculate totals when the quantity changes","","Mon Nov 09 13:45:25 UTC 2026","passed","Mon Nov 09 13:45:37 UTC 2026","","Checkout","Recalculate totals when the quantity changes",""
-"  Login/logout with an already registered account (PLAN.md section 3). The ""seed"" user is
-  created via UI at the start of each scenario that needs it and removed in a best-effort
-  cleanup hook (PLAN.md section 7).","29134","Logout from a logged-in session","","Mon Nov 09 13:46:08 UTC 2026","passed","Mon Nov 09 13:46:37 UTC 2026","","Login and logout","Logout from a logged-in session",""
-"  Product listing, search and detail view (PLAN.md section 3).","3097","Search a product by name and get coherent results","","Mon Nov 09 13:46:15 UTC 2026","passed","Mon Nov 09 13:46:18 UTC 2026","","Product search and details","Search a product by name and get coherent results",""
-"  Contract of the public Search resource (PLAN.md section 4). The site always responds with
-  HTTP 200; the real contract code travels in the ""responseCode"" field of the body.","228","Searching without the required parameter fails","","Mon Nov 09 13:45:03 UTC 2026","passed","Mon Nov 09 13:45:03 UTC 2026","","Search Product API","Searching without the required parameter fails",""
-"  Quick check used as a pre-flight for the UI suite: confirms that the base Page Objects
-  (BasePage, HeaderComponent, FooterComponent, HomePage) work correctly against the real site.","1780","Newsletter subscription from the footer succeeds","","Mon Nov 09 13:45:38 UTC 2026","passed","Mon Nov 09 13:45:40 UTC 2026","","Home page smoke checks","Newsletter subscription from the footer succeeds",""
-"  Adding, updating quantity and removing products from the cart (PLAN.md section 3).","3457","Remove a product from the cart","","Mon Nov 09 13:45:11 UTC 2026","passed","Mon Nov 09 13:45:14 UTC 2026","","Shopping cart","Remove a product from the cart",""
-"  Contract of the public Products resource (PLAN.md section 4). The site always responds with
-  HTTP 200; the real contract code travels in the ""responseCode"" field of the body.","223","POST is not supported on the products list endpoint","","Mon Nov 09 13:45:02 UTC 2026","passed","Mon Nov 09 13:45:03 UTC 2026","","Products API","POST is not supported on the products list endpoint",""
-"  Contract of the public Brands resource (PLAN.md section 4). The site always responds with
-  HTTP 200; the real contract code travels in the ""responseCode"" field of the body.","250","Get the full brands list","","Mon Nov 09 13:45:02 UTC 2026","passed","Mon Nov 09 13:45:02 UTC 2026","","Brands API","Get the full brands list",""
+  create -> verify -> update -> getDetail -> delete.","5573","Create, verify, update, fetch and delete an account","","Tue Nov 10 13:23:37 UTC 2026","passed","Tue Nov 10 13:23:42 UTC 2026","","Account Lifecycle API","Create, verify, update, fetch and delete an account",""
+"  Adding, updating quantity and removing products from the cart (PLAN.md section 3).","29914","Add multiple products and validate each subtotal","","Tue Nov 10 13:23:45 UTC 2026","passed","Tue Nov 10 13:24:15 UTC 2026","","Shopping cart","Add multiple products and validate each subtotal",""
 "  Contract of the public verifyLogin resource (PLAN.md section 4). The site always responds
   with HTTP 200; the real contract code travels in the ""responseCode""/""message"" fields of the
   body. The scenario that needs valid credentials creates its own ""seed"" user via the API
-  (there is no real persistent account to use as a fixture) and removes it when done.","231","DELETE is not supported on the verify login endpoint","","Mon Nov 09 13:45:02 UTC 2026","passed","Mon Nov 09 13:45:02 UTC 2026","","Verify Login API","DELETE is not supported on the verify login endpoint",""
-"  Contract of the public Brands resource (PLAN.md section 4). The site always responds with
-  HTTP 200; the real contract code travels in the ""responseCode"" field of the body.","223","PUT is not supported on the brands list endpoint","","Mon Nov 09 13:45:02 UTC 2026","passed","Mon Nov 09 13:45:02 UTC 2026","","Brands API","PUT is not supported on the brands list endpoint",""
-"  Contract of the public Search resource (PLAN.md section 4). The site always responds with
-  HTTP 200; the real contract code travels in the ""responseCode"" field of the body.","262","Search for an existing product term","","Mon Nov 09 13:45:03 UTC 2026","passed","Mon Nov 09 13:45:03 UTC 2026","","Search Product API","Search for an existing product term",""
+  (there is no real persistent account to use as a fixture) and removes it when done.","255","Verify login without the email parameter","","Tue Nov 10 13:23:41 UTC 2026","passed","Tue Nov 10 13:23:42 UTC 2026","","Verify Login API","Verify login without the email parameter",""
+"  Quick check used as a pre-flight for the UI suite: confirms that the base Page Objects
+  (BasePage, HeaderComponent, FooterComponent, HomePage) work correctly against the real site.","3662","Category navigation from the homepage works","","Tue Nov 10 13:24:53 UTC 2026","passed","Tue Nov 10 13:24:57 UTC 2026","","Home page smoke checks","Category navigation from the homepage works",""
+"  Adding, updating quantity and removing products from the cart (PLAN.md section 3).","4481","Update quantity from the product detail page","","Tue Nov 10 13:24:15 UTC 2026","passed","Tue Nov 10 13:24:19 UTC 2026","","Shopping cart","Update quantity from the product detail page",""
+"  Contract of the public verifyLogin resource (PLAN.md section 4). The site always responds
+  with HTTP 200; the real contract code travels in the ""responseCode""/""message"" fields of the
+  body. The scenario that needs valid credentials creates its own ""seed"" user via the API
+  (there is no real persistent account to use as a fixture) and removes it when done.","4241","Verify login with valid credentials","","Tue Nov 10 13:23:37 UTC 2026","passed","Tue Nov 10 13:23:41 UTC 2026","","Verify Login API","Verify login with valid credentials",""
+"  Quick check used as a pre-flight for the UI suite: confirms that the base Page Objects
+  (BasePage, HeaderComponent, FooterComponent, HomePage) work correctly against the real site.","2348","Newsletter subscription from the footer succeeds","","Tue Nov 10 13:24:51 UTC 2026","passed","Tue Nov 10 13:24:53 UTC 2026","","Home page smoke checks","Newsletter subscription from the footer succeeds",""
+"  Adding, updating quantity and removing products from the cart (PLAN.md section 3).","29104","Add a product to the cart and verify quantity and price","","Tue Nov 10 13:23:45 UTC 2026","passed","Tue Nov 10 13:24:15 UTC 2026","","Shopping cart","Add a product to the cart and verify quantity and price",""
+"  Adding, updating quantity and removing products from the cart (PLAN.md section 3).","4608","Remove a product from the cart","","Tue Nov 10 13:24:15 UTC 2026","passed","Tue Nov 10 13:24:20 UTC 2026","","Shopping cart","Remove a product from the cart",""
 "  New user sign-up via UI (PLAN.md section 3). Each scenario is independent and self-cleaning
   (PLAN.md section 7): they don't depend on each other and don't leave orphaned test accounts,
-  so they can run safely in parallel.","7722","Register a new user with valid data and then delete the account","","Mon Nov 09 13:46:21 UTC 2026","passed","Mon Nov 09 13:46:28 UTC 2026","","User registration","Register a new user with valid data and then delete the account",""
+  so they can run safely in parallel.","12596","Register a new user with valid data and then delete the account","","Tue Nov 10 13:25:35 UTC 2026","passed","Tue Nov 10 13:25:48 UTC 2026","","User registration","Register a new user with valid data and then delete the account",""
 "  Login/logout with an already registered account (PLAN.md section 3). The ""seed"" user is
   created via UI at the start of each scenario that needs it and removed in a best-effort
-  cleanup hook (PLAN.md section 7).","25186","Login with valid credentials shows the logged-in user","","Mon Nov 09 13:45:43 UTC 2026","passed","Mon Nov 09 13:46:08 UTC 2026","","Login and logout","Login with valid credentials shows the logged-in user",""
+  cleanup hook (PLAN.md section 7).","2948","Login with invalid credentials shows an error","","Tue Nov 10 13:24:59 UTC 2026","passed","Tue Nov 10 13:25:02 UTC 2026","","Login and logout","Login with invalid credentials shows an error",""
+"  Login/logout with an already registered account (PLAN.md section 3). The ""seed"" user is
+  created via UI at the start of each scenario that needs it and removed in a best-effort
+  cleanup hook (PLAN.md section 7).","27660","Login with valid credentials shows the logged-in user","","Tue Nov 10 13:24:57 UTC 2026","passed","Tue Nov 10 13:25:25 UTC 2026","","Login and logout","Login with valid credentials shows the logged-in user",""
+"  Contract of the public Brands resource (PLAN.md section 4). The site always responds with
+  HTTP 200; the real contract code travels in the ""responseCode"" field of the body.","204","Get the full brands list","","Tue Nov 10 13:23:42 UTC 2026","passed","Tue Nov 10 13:23:42 UTC 2026","","Brands API","Get the full brands list",""
+"  Product listing, search and detail view (PLAN.md section 3).","2815","View the list of all products","","Tue Nov 10 13:25:28 UTC 2026","failed","Tue Nov 10 13:25:31 UTC 2026","","Product search and details","View the list of all products",""
+"  Contract of the public Products resource (PLAN.md section 4). The site always responds with
+  HTTP 200; the real contract code travels in the ""responseCode"" field of the body.","205","POST is not supported on the products list endpoint","","Tue Nov 10 13:23:42 UTC 2026","passed","Tue Nov 10 13:23:43 UTC 2026","","Products API","POST is not supported on the products list endpoint",""
+"  Contract of the public verifyLogin resource (PLAN.md section 4). The site always responds
+  with HTTP 200; the real contract code travels in the ""responseCode""/""message"" fields of the
+  body. The scenario that needs valid credentials creates its own ""seed"" user via the API
+  (there is no real persistent account to use as a fixture) and removes it when done.","192","Verify login with invalid credentials","","Tue Nov 10 13:23:41 UTC 2026","passed","Tue Nov 10 13:23:41 UTC 2026","","Verify Login API","Verify login with invalid credentials",""
+"  Full checkout with a logged-in user: address, dummy card payment and total recalculation by
+  quantity (PLAN.md section 3). The site has no real coupon field (PLAN.md section 11); that
+  scope is covered here via the total recalculation instead.","14191","Place an order with a dummy card and see the order confirmation","","Tue Nov 10 13:24:20 UTC 2026","passed","Tue Nov 10 13:24:34 UTC 2026","","Checkout","Place an order with a dummy card and see the order confirmation",""
+"  Login/logout with an already registered account (PLAN.md section 3). The ""seed"" user is
+  created via UI at the start of each scenario that needs it and removed in a best-effort
+  cleanup hook (PLAN.md section 7).","32971","Logout from a logged-in session","","Tue Nov 10 13:25:02 UTC 2026","passed","Tue Nov 10 13:25:35 UTC 2026","","Login and logout","Logout from a logged-in session",""
 "  Quick check used as a pre-flight for the UI suite: confirms that the base Page Objects
-  (BasePage, HeaderComponent, FooterComponent, HomePage) work correctly against the real site.","2969","Category navigation from the homepage works","","Mon Nov 09 13:45:40 UTC 2026","passed","Mon Nov 09 13:45:43 UTC 2026","","Home page smoke checks","Category navigation from the homepage works",""
+  (BasePage, HeaderComponent, FooterComponent, HomePage) work correctly against the real site.","1637","The homepage loads with a working header","","Tue Nov 10 13:24:49 UTC 2026","passed","Tue Nov 10 13:24:51 UTC 2026","","Home page smoke checks","The homepage loads with a working header",""
+"  Product listing, search and detail view (PLAN.md section 3).","4009","Search a product by name and get coherent results","","Tue Nov 10 13:25:31 UTC 2026","passed","Tue Nov 10 13:25:35 UTC 2026","","Product search and details","Search a product by name and get coherent results",""
+"  Product listing, search and detail view (PLAN.md section 3).","4501","View a product's detail","","Tue Nov 10 13:25:35 UTC 2026","passed","Tue Nov 10 13:25:39 UTC 2026","","Product search and details","View a product's detail",""
+"  New user sign-up via UI (PLAN.md section 3). Each scenario is independent and self-cleaning
+  (PLAN.md section 7): they don't depend on each other and don't leave orphaned test accounts,
+  so they can run safely in parallel.","14748","Attempt to register with an already existing email shows an error","","Tue Nov 10 13:25:39 UTC 2026","passed","Tue Nov 10 13:25:54 UTC 2026","","User registration","Attempt to register with an already existing email shows an error",""
